@@ -14,15 +14,113 @@ body {
     min-height: 100vh;
     background-color: rgb(219, 219, 219);
     flex-direction: column;
+    transition: 0.3s;
 }
 
-.page-title-container {
+.header {
+    display: flex;
     width: 100%;
     background-color: #34495e;
     padding: 20px 0;
-    display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+}
+
+.theme-toggler {
+    position: absolute;
+    justify-content: center;
+    right: 50px;
+}
+
+.theme-label {
+    width: 140px;
+    height: 60px;
+    position: relative;
+    display: block;
+    background: white;
+    border-radius: 40px;
+    box-shadow: inset 0px 5px 15px rgba(0, 0, 0, 0.4), inset 0px -5px 15px rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.theme-label:after {
+    content: "";
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 9px;
+    left: 9px;
+    background: linear-gradient(180deg, #ffcc89,#d8860b);
+    border-radius: 50%;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+}
+
+.theme-label:active:after {
+    width: 40px;
+}
+
+.sun-icon,.moon-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    z-index: 100;
+}
+
+.sun-icon {
+    right: 10px;
+    fill: #fff;
+    transition: 0.3s;
+}
+
+.moon-icon {
+    left: 10px;
+    fill: #7e7e7e;
+    transition: 0.3s;
+    opacity: 0;
+}
+
+.theme-input:checked + .theme-label .sun-icon {
+    fill: #7e7e7e;
+    opacity: 0;
+}
+
+.theme-input:checked + .theme-label .moon-icon {
+    fill: #fff;
+    opacity: 1;
+}
+
+.theme-input {
+    visibility: hidden;
+    height: 0;
+    width: 0;
+}
+
+.theme-input:checked + .theme-label {
+    background: #242424;
+}
+
+.theme-input:checked + .theme-label:after {
+    left: 130px;
+    transform: translateX(-100%);
+    background: white;
+}
+
+body.dark-mode .container{
+    background-color: white;
+}
+
+body.dark-mode .controls, body.dark-mode .heap-container {
+    background-color: #333333;
+}
+
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
 }
 
 .page-title {
@@ -38,12 +136,13 @@ body {
 
 .container {
     display: flex;
+    gap: 3rem;
     max-width: 1500px;
     width: 100%;
     padding: 20px;
     justify-content: center;
     align-items: flex-start;
-    background-color: #fff;
+    background-color: #333333;
     border-radius: 12px;
     margin: 20px auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -61,12 +160,6 @@ body {
     height: 500px;
     position: relative;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.heap-node {
-    display: inline-block;
-    text-align: center;
-    margin: 10px;
 }
 
 #heapSvg {
@@ -100,7 +193,7 @@ body {
     color: #000000;
 }
 
-.controls select,.controls input {
+.controls select, .controls input {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
@@ -123,11 +216,11 @@ button {
     box-sizing: border-box;
 }
 
-#insertBtn, #randomHeap{
+#insertBtn, #randomHeap {
     background-color: #4CAF50;
 }
 
-#searchBtn, #convertHeap{
+#searchBtn, #convertHeap {
     background-color: #3b5de5;
 }
 
@@ -140,7 +233,7 @@ button {
     gap: 10px;
 }
 
-.controls div input,.controls div select {
+.controls div input, .controls div select {
     margin-right: 10px;
 }
 

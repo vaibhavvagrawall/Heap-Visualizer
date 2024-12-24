@@ -8,8 +8,15 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
-    <div class="page-title-container">
+    <div class="header">
         <h1 class="page-title">HEAP VISUALIZER</h1>
+        <div class="theme-toggler">
+            <input type="checkbox" id="darkmode" class="theme-input">
+            <label for="darkmode" class="theme-label">
+                <img src="images/moon.png" alt="Moon" class="moon-icon">
+                <img src="images/sun.png" alt="Sun" class="sun-icon">
+            </label>
+        </div>
     </div>
 
     <div class="container">
@@ -63,5 +70,6 @@
 
     <script src="js/heap.js"></script>
     <script src="js/render.js"></script>
+    <script src="js/theme.js"></script>
 </body>
 </html>
