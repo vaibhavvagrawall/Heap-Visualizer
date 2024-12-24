@@ -5,6 +5,8 @@ const height = +svg.attr("height");
 let heap = [];
 let heapType = "max";
 
+//Position of Node and Edge Calculation
+
 function calculateNodePositions(heap) {
     const positions = [];
     const ySpacing = 100;
@@ -21,6 +23,8 @@ function calculateNodePositions(heap) {
     }
     return positions;
 }
+
+//Node and Edges Creation
 
 function renderHeap() {
     const maxDepth = 4;
@@ -78,13 +82,55 @@ function renderHeap() {
         .style("font-weight", "bold");
 }
 
+function highlightNode(event, d) {
+    svg.selectAll(".node").classed("highlight", false);
+    d3.select(this).select("circle").classed("highlight", true);
+}
+
+//Heapify Processes
+
 function swapHeapNodes(index1, index2) {
     [heap[index1], heap[index2]] = [heap[index2], heap[index1]];
 }
 
-function highlightNode(event, d) {
-    svg.selectAll(".node").classed("highlight", false);
-    d3.select(this).select("circle").classed("highlight", true);
+function compare(a, b) {
+    return heapType === "max" ? a > b : a < b;
+}
+
+function heapifyUp(index) {
+    while (index > 0 && compare(heap[index], heap[Math.floor((index - 1) / 2)])) {
+        swapHeapNodes(index, Math.floor((index - 1) / 2));
+        index = Math.floor((index - 1) / 2);
+    }
+}
+
+function heapifyDown(index) {
+    while (true) {
+        let largest = index;
+        const left = 2 * index + 1;
+        const right = 2 * index + 2;
+        if (left < heap.length && compare(heap[left], heap[largest])) {
+            largest = left;
+        }
+        if (right < heap.length && compare(heap[right], heap[largest])) {
+            largest = right;
+        }
+        if (largest === index) 
+            break;
+        swapHeapNodes(index, largest);
+        index = largest;
+    }
+}
+
+// Heap Functions
+
+function searchNode(value) {
+    const index = heap.indexOf(value);
+    if(index !== -1){
+        alert(`The value ${value} is present at index ${index} in the heap.`);
+    }else{
+        alert(`The value ${value} is not present in the heap.`);
+    }
 }
 
 function insertNode(value) {
@@ -121,34 +167,20 @@ function deleteRoot() {
     }
 }
 
-function heapifyUp(index) {
-    while (index > 0 && compare(heap[index], heap[Math.floor((index - 1) / 2)])) {
-        swapHeapNodes(index, Math.floor((index - 1) / 2));
-        index = Math.floor((index - 1) / 2);
+function convertHeap() {
+    if (heap.length === 0) {
+        alert("Cannot convert heap. The heap is empty.");
+        return;
     }
-}
-
-function heapifyDown(index) {
-    while (true) {
-        let largest = index;
-        const left = 2 * index + 1;
-        const right = 2 * index + 2;
-
-        if (left < heap.length && compare(heap[left], heap[largest])) {
-            largest = left;
-        }
-        if (right < heap.length && compare(heap[right], heap[largest])) {
-            largest = right;
-        }
-        if (largest === index) break;
-
-        swapHeapNodes(index, largest);
-        index = largest;
+    heapType = heapType === "max" ? "min" : "max";
+    const convertButton = document.getElementById("convertHeap");
+    convertButton.textContent = heapType === "max" ? "Convert Max Heap to Min Heap" : "Convert Min Heap to Max Heap";
+    const heapTypeSelect = document.getElementById("heapType");
+    heapTypeSelect.value = heapType;
+    for (let i = Math.floor(heap.length / 2) - 1; i >= 0; i--) {
+        heapifyDown(i);
     }
-}
-
-function compare(a, b) {
-    return heapType === "max" ? a > b : a < b;
+    renderHeap();
 }
 
 function randomizeHeap() {
@@ -158,36 +190,6 @@ function randomizeHeap() {
         heapifyDown(i);
     }
     renderHeap();
-}
-
-function convertHeap() {
-    if (heap.length === 0) {
-        alert("Cannot convert heap. The heap is empty.");
-        return;
-    }
-
-    heapType = heapType === "max" ? "min" : "max";
-
-    const convertButton = document.getElementById("convertHeap");
-    convertButton.textContent = heapType === "max" ? "Convert Max Heap to Min Heap" : "Convert Min Heap to Max Heap";
-
-    const heapTypeSelect = document.getElementById("heapType");
-    heapTypeSelect.value = heapType;
-
-    for (let i = Math.floor(heap.length / 2) - 1; i >= 0; i--) {
-        heapifyDown(i);
-    }
-
-    renderHeap();
-}
-
-function searchNode(value) {
-    const index = heap.indexOf(value);
-    if(index !== -1){
-        alert(`The value ${value} is present at index ${index} in the heap.`);
-    }else{
-        alert(`The value ${value} is not present in the heap.`);
-    }
 }
 
 // Event Listeners
@@ -215,12 +217,10 @@ document.getElementById("deleteRootBtn").addEventListener("click", () =>{
     deleteRoot();
 });
 
-document.getElementById("randomHeap").addEventListener("click",  () =>{
-    randomizeHeap();
-});
-
 document.getElementById("convertHeap").addEventListener("click", () => {
     convertHeap();
 });
 
-renderHeap();
+document.getElementById("randomHeap").addEventListener("click",  () =>{
+    randomizeHeap();
+});
