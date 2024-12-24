@@ -33,7 +33,6 @@ function renderHeap() {
 
     const positions = calculateNodePositions(heap);
 
-    // Create a group for edges (links) to ensure they are behind the nodes
     let linkGroup = svg.select(".linkGroup");
     if (linkGroup.empty()) {
         linkGroup = svg.append("g").attr("class", "linkGroup");
@@ -43,7 +42,6 @@ function renderHeap() {
         nodeGroup = svg.append("g").attr("class", "nodeGroup");
     }
 
-    // Render links (lines)
     const links = linkGroup.selectAll(".link")
         .data(heap.slice(1))
         .join("line")
@@ -55,7 +53,6 @@ function renderHeap() {
         .attr("stroke", "#3498db")
         .attr("stroke-width", 2);
 
-    // Render nodes
     const nodes = nodeGroup.selectAll(".nodeGroup")
         .data(heap)
         .join("g")
@@ -63,11 +60,9 @@ function renderHeap() {
         .attr("transform", (d, i) => `translate(${positions[i].x}, ${positions[i].y})`)
         .on("click", highlightNode);
 
-    // Clear existing circles and text
     nodes.selectAll("circle").remove();
     nodes.selectAll("text").remove();
 
-    // Append circles
     nodes.append("circle")
         .attr("class", "node")
         .attr("r", 20)
@@ -75,7 +70,6 @@ function renderHeap() {
         .attr("stroke", "#f1c40f")
         .attr("stroke-width", 2);
 
-    // Append text
     nodes.append("text")
         .attr("text-anchor", "middle")
         .attr("alignment-baseline", "middle")
@@ -110,6 +104,9 @@ function deleteNode(value) {
             heapifyUp(index);
         }
         renderHeap();
+    }else{
+        alert(`Value ${value} is not in the heap.`);
+        return;
     }
 }
 
@@ -119,6 +116,9 @@ function deleteRoot() {
         heap.pop();
         heapifyDown(0);
         renderHeap();
+    }else{
+        alert("Cannot delete root. The heap is empty.");
+        return;
     }
 }
 
@@ -171,13 +171,37 @@ document.getElementById("deleteBtn").addEventListener("click", () => {
     if (!isNaN(value)) deleteNode(value);
 });
 
+function convertHeap() {
+    if (heap.length === 0) {
+        alert("Cannot convert heap. The heap is empty.");
+        return;
+    }
+
+    heapType = heapType === "max" ? "min" : "max";
+
+    const convertButton = document.getElementById("convertHeap");
+    convertButton.textContent = heapType === "max" ? "Convert Max Heap to Min Heap" : "Convert Min Heap to Max Heap";
+
+    const heapTypeSelect = document.getElementById("heapType");
+    heapTypeSelect.value = heapType;
+
+    for (let i = Math.floor(heap.length / 2) - 1; i >= 0; i--) {
+        heapifyDown(i);
+    }
+
+    renderHeap();
+}
+
+document.getElementById("convertHeap").addEventListener("click", () => {
+    convertHeap();
+});
+
 document.getElementById("removeBtn").addEventListener("click", deleteRoot);
 
 document.getElementById("randomInitBtn").addEventListener("click", randomizeHeap);
 
 document.getElementById("heapType").addEventListener("change", (e) => {
     heapType = e.target.value;
-    randomizeHeap();
 });
 
 renderHeap();
