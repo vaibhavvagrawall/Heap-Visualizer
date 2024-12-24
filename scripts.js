@@ -196,6 +196,8 @@ function randomizeHeap() {
 
 document.getElementById("heapType").addEventListener("change", (e) => {
     heapType = e.target.value;
+    const convertButton = document.getElementById("convertHeap");
+    convertButton.textContent = heapType === "max" ? "Convert Max Heap to Min Heap" : "Convert Min Heap to Max Heap";
 });
 
 document.getElementById("searchBtn").addEventListener("click", () => {
