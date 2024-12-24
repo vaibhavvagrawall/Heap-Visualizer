@@ -161,16 +161,6 @@ function randomizeHeap() {
     renderHeap();
 }
 
-document.getElementById("insertBtn").addEventListener("click", () => {
-    const value = parseInt(document.getElementById("nodeInput").value, 10);
-    if (!isNaN(value)) insertNode(value);
-});
-
-document.getElementById("deleteBtn").addEventListener("click", () => {
-    const value = parseInt(document.getElementById("nodeDelete").value, 10);
-    if (!isNaN(value)) deleteNode(value);
-});
-
 function convertHeap() {
     if (heap.length === 0) {
         alert("Cannot convert heap. The heap is empty.");
@@ -192,16 +182,40 @@ function convertHeap() {
     renderHeap();
 }
 
-document.getElementById("convertHeap").addEventListener("click", () => {
-    convertHeap();
-});
-
-document.getElementById("removeBtn").addEventListener("click", deleteRoot);
-
-document.getElementById("randomInitBtn").addEventListener("click", randomizeHeap);
+function searchNode(value) {
+    const index = heap.indexOf(value);
+    alert(`The value ${value} is present at index ${index} in the heap.`);
+}
 
 document.getElementById("heapType").addEventListener("change", (e) => {
     heapType = e.target.value;
+});
+
+document.getElementById("searchBtn").addEventListener("click", () => {
+    const value = parseInt(document.getElementById("nodeSearch").value, 10);
+    if (!isNaN(value)) searchNode(value);
+});
+
+document.getElementById("insertBtn").addEventListener("click", () => {
+    const value = parseInt(document.getElementById("nodeInput").value, 10);
+    if (!isNaN(value)) insertNode(value);
+});
+
+document.getElementById("deleteBtn").addEventListener("click", () => {
+    const value = parseInt(document.getElementById("nodeDelete").value, 10);
+    if (!isNaN(value)) deleteNode(value);
+});
+
+document.getElementById("deleteRootBtn").addEventListener("click", () =>{
+    deleteRoot();
+});
+
+document.getElementById("randomHeap").addEventListener("click",  () =>{
+    randomizeHeap();
+});
+
+document.getElementById("convertHeap").addEventListener("click", () => {
+    convertHeap();
 });
 
 renderHeap();
