@@ -4,6 +4,7 @@ const height = +svg.attr("height");
 
 let heap = [];
 let heapType = "max";
+
 function calculateNodePositions(heap) {
     const positions = [];
     const ySpacing = 100;
@@ -18,7 +19,6 @@ function calculateNodePositions(heap) {
 
         positions.push({ x: xPos, y: yPos });
     }
-
     return positions;
 }
 
@@ -34,10 +34,12 @@ function renderHeap() {
     const positions = calculateNodePositions(heap);
 
     let linkGroup = svg.select(".linkGroup");
+    let nodeGroup = svg.select(".nodeGroup");
+
     if (linkGroup.empty()) {
         linkGroup = svg.append("g").attr("class", "linkGroup");
     }
-    let nodeGroup = svg.select(".nodeGroup");
+    
     if (nodeGroup.empty()) {
         nodeGroup = svg.append("g").attr("class", "nodeGroup");
     }
@@ -59,9 +61,6 @@ function renderHeap() {
         .attr("class", "nodeGroup")
         .attr("transform", (d, i) => `translate(${positions[i].x}, ${positions[i].y})`)
         .on("click", highlightNode);
-
-    nodes.selectAll("circle").remove();
-    nodes.selectAll("text").remove();
 
     nodes.append("circle")
         .attr("class", "node")
@@ -184,8 +183,14 @@ function convertHeap() {
 
 function searchNode(value) {
     const index = heap.indexOf(value);
-    alert(`The value ${value} is present at index ${index} in the heap.`);
+    if(index !== -1){
+        alert(`The value ${value} is present at index ${index} in the heap.`);
+    }else{
+        alert(`The value ${value} is not present in the heap.`);
+    }
 }
+
+// Event Listeners
 
 document.getElementById("heapType").addEventListener("change", (e) => {
     heapType = e.target.value;
