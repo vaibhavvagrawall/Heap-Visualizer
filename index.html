@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heap Visualizer</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <div class="page-title-container">
+        <h1 class="page-title">HEAP VISUALIZER</h1>
+    </div>
+
+    <div class="container">
+        <div class="heap-container">
+            <svg id="heapSvg" width="1000" height="1000"></svg>
+        </div>
+        <div class="controls">
+            <h3>Settings</h3>
+            <div>
+                <label for="heapType">Heap Type:</label>
+                <select id="heapType">
+                    <option value="max">Max Heap</option>
+                    <option value="min">Min Heap</option>
+                </select>
+            </div>
+            <div>
+                <input type="number" id="nodeInput" placeholder="Enter Number">
+                <button id="insertBtn">Insert</button>
+            </div>
+            <div>
+                <input type="number" id="nodeDelete" placeholder="Enter number">
+                <button id="deleteBtn">Delete</button>
+            </div>
+            <div>
+                <button id="removeBtn">Delete Root</button>
+                <button id="randomInitBtn">Random Heap</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-left">
+            <p>&copy; 2024 All Rrights Reserved | Created by <strong>Vaibhav Agrawal</strong></p>
+        </div>
+        <div class="footer-right">
+            <a href="https://github.com/vaibhavvagrawall/Heap-Visualizer" target="_blank" class="footer-icon">
+                <img src="images/github.png" alt="GitHub">
+            </a>
+            <a href="https://www.linkedin.com/in/vaibhavvagrawall/" target="_blank" class="footer-icon">
+                <img src="images/linkedin.png" alt="LinkedIn">
+            </a>
+        </div>
+    </footer>    
+
+    <script src="scripts.js"></script>
+</body>
+</html>
