@@ -157,7 +157,7 @@ body.dark-mode {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 500px;
+    height: 600px;
     position: relative;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }

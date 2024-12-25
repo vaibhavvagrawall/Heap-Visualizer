@@ -98,7 +98,7 @@ function convertHeap() {
 }
 
 function randomizeHeap() {
-    const heapSize = Math.floor(Math.random() * 10) + 5;
+    const heapSize = Math.floor(Math.random() * 15) + 5;
     heap = Array.from({ length: heapSize }, () => Math.floor(Math.random() * 100));
     for (let i = Math.floor(heap.length / 2) - 1; i >= 0; i--) {
         heapifyDown(i);

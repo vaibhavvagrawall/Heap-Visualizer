@@ -20,7 +20,7 @@ function calculateNodePositions(heap) {
 }
 
 function renderHeap() {
-    const maxDepth = 4;
+    const maxDepth = 5;
     const currentDepth = Math.floor(Math.log2(heap.length)) + 1;
 
     if (currentDepth > maxDepth) {
