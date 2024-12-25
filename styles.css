@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: Quicksand, Arial, sans-serif;
     margin: 0;
     padding: 0;
     display: flex;
@@ -188,6 +188,7 @@ body.dark-mode .controls .heap-type-label {
     font-size: 1.75rem;
     margin-bottom: 15px;
     text-align: center;
+    font-weight: medium;
 }
 
 .controls label {
@@ -212,7 +213,7 @@ button {
     padding: 12px;
     font-size: 1.1rem;
     color: white;
-    border: 1px solid #ccc;
+    border: 1px solid transparent;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -247,7 +248,7 @@ button {
     border: 1px solid #ccc;
     border-radius: 4px;
     padding: 10px;
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: #333;
     background-color: #f9f9f9;
     margin-top: 10px;
@@ -268,14 +269,14 @@ button {
     font-size: 1rem;
 }
 
-.footer-left p {
+.footer-left h3 {
     margin: 0;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     color: #ecf0f1;
 }
 
 .footer-left strong {
-    color: rgb(230, 230, 230);
+    font-weight: medium;
 }
 
 .footer-right {
