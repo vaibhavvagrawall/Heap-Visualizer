@@ -106,37 +106,87 @@ function randomizeHeap() {
     renderHeap();
 }
 
+function heapSort(array, type) {
+    if (heap.length === 0) {
+        alert("Cannot sort heap. The heap is empty.");
+        return;
+    }
+    const comparator = type === "max" ? (a, b) => a > b : (a, b) => a < b;
+    function heapify(size, rootIndex) {
+        let largest = rootIndex;
+        const left = 2 * rootIndex + 1;
+        const right = 2 * rootIndex + 2;
+        if (left < size && comparator(array[left], array[largest])) {
+            largest = left;
+        }
+        if (right < size && comparator(array[right], array[largest])) {
+            largest = right;
+        }
+        if (largest !== rootIndex) {
+            [array[rootIndex], array[largest]] = [array[largest], array[rootIndex]];
+            heapify(size, largest);
+        }
+    }
+    for (let i = Math.floor(array.length / 2) - 1; i >= 0; i--) {
+        heapify(array.length, i);
+    }
+    for (let i = array.length - 1; i > 0; i--) {
+        [array[0], array[i]] = [array[i], array[0]];
+        heapify(i, 0);
+    }
+    return type === "max" ? array.reverse() : array;
+}
+
 // Event Listeners
 
 document.getElementById("heapType").addEventListener("change", (e) => {
     heapType = e.target.value;
+    heap = [];
+    renderHeap();
     const convertButton = document.getElementById("convertHeap");
     convertButton.textContent = heapType === "max" ? "Convert Max Heap to Min Heap" : "Convert Min Heap to Max Heap";
+    document.getElementById("heapSortOutput").value = "";
 });
 
 document.getElementById("searchBtn").addEventListener("click", () => {
     const value = parseInt(document.getElementById("nodeSearch").value, 10);
     if (!isNaN(value)) searchNode(value);
+    document.getElementById("nodeSearch").value = "";
 });
 
 document.getElementById("insertBtn").addEventListener("click", () => {
     const value = parseInt(document.getElementById("nodeInput").value, 10);
     if (!isNaN(value)) insertNode(value);
+    document.getElementById("nodeInput").value = "";
+    document.getElementById("heapSortOutput").value = "";
 });
 
 document.getElementById("deleteBtn").addEventListener("click", () => {
     const value = parseInt(document.getElementById("nodeDelete").value, 10);
     if (!isNaN(value)) deleteNode(value);
+    document.getElementById("nodeDelete").value = "";
+    document.getElementById("heapSortOutput").value = "";
 });
 
 document.getElementById("deleteRootBtn").addEventListener("click", () =>{
     deleteRoot();
+    document.getElementById("heapSortOutput").value = "";
 });
 
 document.getElementById("convertHeap").addEventListener("click", () => {
     convertHeap();
+    document.getElementById("heapSortOutput").value = "";
 });
 
 document.getElementById("randomHeap").addEventListener("click",  () =>{
     randomizeHeap();
+    document.getElementById("heapSortOutput").value = "";
+});
+
+document.getElementById("heapSortBtn").addEventListener("click", () => {
+    const sortedHeap = heapSort([...heap], heapType);
+    const output = heapType === "max" 
+        ? `Ascending order: ${sortedHeap.join(", ")}`
+        : `Descending order: ${sortedHeap.join(", ")}`;
+    document.getElementById("heapSortOutput").value = output;
 });
