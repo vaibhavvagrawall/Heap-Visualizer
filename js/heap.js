@@ -48,9 +48,15 @@ function searchNode(value) {
 }
 
 function insertNode(value) {
-    heap.push(value);
-    heapifyUp(heap.length - 1);
-    renderHeap();
+    const maxNodes = 31;
+    if (heap.length >= maxNodes){
+        alert("The tree depth exceeds the limit of 4. Please choose a smaller dataset for better visualization.");
+        return;
+    }else{
+        heap.push(value);
+        heapifyUp(heap.length - 1);
+        renderHeap();
+    }
 }
 
 function deleteNode(value) {

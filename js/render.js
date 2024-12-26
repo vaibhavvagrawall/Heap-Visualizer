@@ -33,12 +33,6 @@ function calculateNodePositions(heap, width, height) {
 }
 
 function renderHeap() {
-    const maxDepth = 5;
-    const currentDepth = Math.floor(Math.log2(heap.length)) + 1;
-    if (currentDepth > maxDepth) {
-        alert("The tree depth exceeds the limit of 4. Please choose a smaller dataset for better visualization.");
-        return;
-    }
     const positions = setSvgDimensions();
     const width = +svg.attr("width");
     const height = +svg.attr("height");
