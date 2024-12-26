@@ -1,3 +1,4 @@
+let alertShown = false;
 const svg = d3.select("#heapSvg");
 
 function setSvgDimensions() {
@@ -11,8 +12,9 @@ function setSvgDimensions() {
     svg.attr("width", width).attr("height", height);
     const container = document.querySelector(".heap-container");
     container.style.width = `${width}px`;
-    if(screenWidth <= 425){
+    if(screenWidth <= 425 && !alertShown){
             alert("For the best experience, please use a tablet or laptop for better visualization and interaction.");
+            alertShown = true;
         }
     return positions;
 }
