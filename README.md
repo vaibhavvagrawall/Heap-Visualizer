@@ -31,4 +31,4 @@ To run this project locally, you'll need:
 ## Demo
 
 A live demo of the project is available below:
-- **Live Demo**: [Link](link-to-live-demo)
+- **Live Demo**: [Link](https://heap-visualizer.vercel.app/)
