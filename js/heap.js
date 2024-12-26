@@ -149,23 +149,36 @@ document.getElementById("heapType").addEventListener("change", (e) => {
 });
 
 document.getElementById("searchBtn").addEventListener("click", () => {
-    const value = parseInt(document.getElementById("nodeSearch").value, 10);
-    if (!isNaN(value)) searchNode(value);
-    document.getElementById("nodeSearch").value = "";
+    const searchElement = document.getElementById("nodeSearch");
+    const value = parseInt(searchElement.value, 10);
+    if (isNaN(value)) {
+        alert("Please enter a valid numeric value to search.");
+    } else {
+        searchNode(value);
+    }
+    searchElement.value = "";
 });
 
 document.getElementById("insertBtn").addEventListener("click", () => {
-    const value = parseInt(document.getElementById("nodeInput").value, 10);
-    if (!isNaN(value)) insertNode(value);
-    document.getElementById("nodeInput").value = "";
-    document.getElementById("heapSortOutput").value = "";
+    const insertElement = document.getElementById("nodeInput");
+    const value = parseInt(insertElement.value, 10);
+    if (isNaN(value)) {
+        alert("Please enter a valid numeric value to insert.");
+    } else {
+        insertNode(value);
+    }
+    insertElement.value = "";
 });
 
 document.getElementById("deleteBtn").addEventListener("click", () => {
-    const value = parseInt(document.getElementById("nodeDelete").value, 10);
-    if (!isNaN(value)) deleteNode(value);
-    document.getElementById("nodeDelete").value = "";
-    document.getElementById("heapSortOutput").value = "";
+    const deleteElement = document.getElementById("nodeDelete");
+    const value = parseInt(deleteElement.value, 10);
+    if (isNaN(value)) {
+        alert("Please enter a valid numeric value to delete.");
+    } else {
+        deleteNode(value);
+    }
+    deleteElement.value = "";
 });
 
 document.getElementById("deleteRootBtn").addEventListener("click", () =>{
