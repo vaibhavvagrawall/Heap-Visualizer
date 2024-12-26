@@ -22,7 +22,7 @@ This project is a **Heap Visualization Tool** that allows users to interact with
 - **HTML/CSS**: Basic structure and styling for the web page.
 - **JavaScript**: Logic for heap operations, event handling, and DOM manipulation.
 
-### Prerequisites
+## Prerequisites
 
 To run this project locally, you'll need:
 - A modern web browser (e.g., Chrome, Firefox, Edge).
