@@ -1,4 +1,4 @@
-# Heap Visualization and Operations
+# Heap Visualizer
 
 This project is a **Heap Visualization Tool** that allows users to interact with a heap data structure. Users can perform various heap operations like inserting nodes, deleting nodes, searching for elements, converting between max-heap and min-heap, and sorting a heap. The heap is visualized in real-time using D3.js, where users can observe heapify processes and node manipulations.
 
